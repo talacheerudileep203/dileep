@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Item Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      background: #28a745;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fafafa;
+      margin: 0.5rem 0;
+      padding: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .remove-btn {
+      background: #dc3545;
+      border: none;
+      color: #fff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .remove-btn:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Item Manager</h1>
+    <form id="item-form">
+      <input type="text" id="item-input" placeholder="Enter item..." required />
+      <button type="submit">Add Item</button>
+    </form>
+    <ul id="item-list"></ul>
+  </div>
+
+  <script>
+    const form = document.getElementById('item-form');
+    const itemInput = document.getElementById('item-input');
+    const itemList = document.getElementById('item-list');
+
+    // Function to create a list item element
+    function createListItem(text) {
+      const li = document.createElement('li');
+      li.textContent = text;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = 'Remove';
+      removeBtn.classList.add('remove-btn');
+      removeBtn.onclick = () => {
+        li.remove();
+      };
+
+      li.appendChild(removeBtn);
+      return li;
+    }
+
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const itemText = itemInput.value.trim();
+      if (itemText !== '') {
+        const li = createListItem(itemText);
+        itemList.appendChild(li);
+        itemInput.value = '';
+        itemInput.focus();
+      }
+    });
+  </script>
+</body>
+</html>
